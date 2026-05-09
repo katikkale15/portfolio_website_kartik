@@ -7,6 +7,8 @@
   <meta name="description" content="Kartik Kale — Data Scientist, ML Engineer, and AI Researcher. MS in Data Science at NYU. Building intelligent systems at the intersection of AI, computer vision, and robotics." />
   <meta property="og:title" content="Kartik Kale — AI/ML Engineer" />
   <meta property="og:description" content="Data Scientist & ML Engineer. MS in Data Science at NYU. Formerly at Nakakita Seisakusho, DRDO, and VIT." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐼</text></svg>">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1028,6 +1030,7 @@
       <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#blog">Blog</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#contact" class="nav-cta">Contact</a></li>
     </ul>
@@ -1563,6 +1566,25 @@
 </style>
 
 <script>
+// ── Canvas cross-browser polyfills ─────────────────────────────────────────
+if (!CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+    const rad = Math.min(typeof r === 'number' ? r : r[0], w / 2, h / 2);
+    this.moveTo(x + rad, y);
+    this.lineTo(x + w - rad, y);
+    this.quadraticCurveTo(x + w, y, x + w, y + rad);
+    this.lineTo(x + w, y + h - rad);
+    this.quadraticCurveTo(x + w, y + h, x + w - rad, y + h);
+    this.lineTo(x + rad, y + h);
+    this.quadraticCurveTo(x, y + h, x, y + h - rad);
+    this.lineTo(x, y + rad);
+    this.quadraticCurveTo(x, y, x + rad, y);
+    this.closePath();
+  };
+}
+</script>
+
+<script>
 // ── Load Medium posts ───────────────────────────────────────────────────────
 async function loadMediumPosts() {
   const container = document.getElementById('medium-posts');
@@ -2011,7 +2033,6 @@ document.querySelectorAll('a, button, .project-card, .skill-tag, .stat-card').fo
           ctx.font = `700 ${9 * dpr}px Inter,sans-serif`;
           ctx.fillStyle = `rgb(${r},${g},${b})`;
           ctx.textAlign = 'center';
-          ctx.letterSpacing = `${1.5 * dpr}px`;
           const labelX = li % 2 === 0 ? fx - nodeR * 4 : fx + nodeR * 4;
           ctx.fillText(SECTIONS[li].label, labelX, fy + 3 * dpr);
           ctx.restore();
