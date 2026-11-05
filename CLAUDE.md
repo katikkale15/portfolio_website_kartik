@@ -24,7 +24,7 @@ uvicorn main:app --reload         # dev server on :8000
 
 Single-page portfolio with a vanilla JS/HTML frontend (no framework) and a FastAPI backend.
 
-**Frontend** (`frontend/`) — plain `index.html` + assets, bundled by Vite. During development, Vite proxies all `/api/*` requests to `localhost:8000`, so no CORS issues locally. Production build outputs to `frontend/dist/`.
+**Frontend** (`frontend/`) — plain `index.html` + assets, bundled by Vite. Production build outputs to `frontend/dist/`. The frontend is currently fully static: it makes no `/api` calls (no contact form, analytics, or live Medium feed) because the backend is not deployed. Design: beige + forest green with a purple accent, light/dark themes via CSS tokens on `:root`. During development, Vite still proxies `/api/*` to `localhost:8000` if those features are reintroduced.
 
 **Backend** (`backend/`) — FastAPI app split into three routers mounted at:
 - `POST /api/contact` — sends email via SendGrid (`contact.py`); falls back to console logging if `SENDGRID_API_KEY` is absent (dev mode). Fields are HTML-escaped before insertion into the email body; name capped at 100 chars, message at 2000 chars.
